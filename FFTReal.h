@@ -114,11 +114,11 @@ void FFTReal<T, Alloc>::inverse (const std::complex<T>* freqData, T* timeData, b
     if (! inPlace)
     {
         tempBuffer = (std::complex<T>*) alloca (size * sizeof (std::complex<T>));
-        
-        tempBuffer[0] = { freqData[0].real() + freqData[size].real(),
-                          freqData[0].real() - freqData[size].real() };
         std::memcpy (tempBuffer + 1, freqData + 1, (size - 1) * sizeof (std::complex<T>));
     }
+    
+    tempBuffer[0] = { freqData[0].real() + freqData[size].real(),
+                      freqData[0].real() - freqData[size].real() };
     
     if constexpr (fftpp_is_integral<T>)
     {
