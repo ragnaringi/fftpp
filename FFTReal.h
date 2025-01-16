@@ -122,11 +122,11 @@ void FFTReal<T, Alloc>::inverse (const std::complex<T>* freqData, T* timeData, b
     
     if constexpr (fftpp_is_integral<T>)
     {
-        for (auto k = 0; k < size; k++)
+        for (auto k = 0; k < size; ++k)
             cdiv (tempBuffer[k], 2);
     }
     
-    for (auto k = 1; k <= size / 2; k++)
+    for (auto k = 1; k <= size / 2; ++k)
     {
         auto s0 = tempBuffer[k];
         auto s1 = std::conj (tempBuffer[size - k]);
